@@ -48,3 +48,29 @@
     start();
   })();
 
+
+// ---- Delhi 2023 flood photo lightbox ----
+(function(){
+  const lb=document.getElementById('lightbox');
+  if(!lb) return;
+  const img=document.getElementById('lbImg');
+  const countEl=document.getElementById('lbCount');
+  const N=20; let i=0;
+  const path=n=>'assets/flood/'+(((n%N)+N)%N+1)+'.jpg';
+  function preload(n){ const p=new Image(); p.src=path(n); }
+  function show(n){ i=((n%N)+N)%N; img.src=path(i); countEl.textContent=(i+1)+' / '+N; preload(i+1); preload(i-1); }
+  function open(n){ show(n||0); lb.classList.add('open'); document.body.style.overflow='hidden'; }
+  function close(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+  const cardBtn=document.getElementById('floodCardBtn'); if(cardBtn) cardBtn.addEventListener('click',()=>open(0));
+  const fab=document.getElementById('floodFab'); if(fab) fab.addEventListener('click',()=>open(0));
+  document.getElementById('lbClose').addEventListener('click',close);
+  document.getElementById('lbNext').addEventListener('click',()=>show(i+1));
+  document.getElementById('lbPrev').addEventListener('click',()=>show(i-1));
+  lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
+  document.addEventListener('keydown',e=>{
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    else if(e.key==='ArrowRight') show(i+1);
+    else if(e.key==='ArrowLeft') show(i-1);
+  });
+})();
