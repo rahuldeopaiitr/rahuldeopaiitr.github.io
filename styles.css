@@ -211,7 +211,9 @@
   .slider .cap{justify-content:flex-start;}
 
 
-  /* ===== Background depth: section tints + footer wave (contour lines removed) ===== */
+  /* ===== Background depth: contour texture, section tints, footer wave ===== */
+  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%271200%27%20height%3D%27720%27%20viewBox%3D%270%200%201200%20720%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%2316697A%27%20stroke-width%3D%271.5%27%20stroke-opacity%3D%270.10%27%3E%3Cpath%20d%3D%27M0%2C60%20C200%2C26%20400%2C94%20600%2C60%20S1000%2C26%201200%2C60%27/%3E%3Cpath%20d%3D%27M0%2C180%20C200%2C152%20400%2C208%20600%2C180%20S1000%2C152%201200%2C180%27/%3E%3Cpath%20d%3D%27M0%2C300%20C200%2C260%20400%2C340%20600%2C300%20S1000%2C260%201200%2C300%27/%3E%3Cpath%20d%3D%27M0%2C420%20C200%2C390%20400%2C450%20600%2C420%20S1000%2C390%201200%2C420%27/%3E%3Cpath%20d%3D%27M0%2C540%20C200%2C504%20400%2C576%20600%2C540%20S1000%2C504%201200%2C540%27/%3E%3Cpath%20d%3D%27M0%2C660%20C200%2C634%20400%2C686%20600%2C660%20S1000%2C634%201200%2C660%27/%3E%3C/g%3E%3C/svg%3E");background-size:820px 492px;background-repeat:repeat;}
   section:nth-of-type(even){background:rgba(22,105,122,0.05);}
   footer{position:relative;padding-top:46px;}
   footer::before{content:"";position:absolute;top:0;left:0;right:0;height:30px;pointer-events:none;
