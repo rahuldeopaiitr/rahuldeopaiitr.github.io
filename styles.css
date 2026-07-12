@@ -204,3 +204,8 @@
   .lb-cap{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#fff;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;opacity:.92;}
   .lb-cap .count{color:var(--ochre);}
   @media(max-width:640px){.lb-nav{width:42px;height:42px;font-size:22px;}.flood-fab{padding:10px 14px;font-size:11.5px;}.flood-card{flex-direction:column;text-align:center;}.flood-card>img{width:100%;height:150px;}}
+
+  /* photo-slider wrapper + caption tweaks */
+  .slider-wrap{margin-top:4px;}
+  #events-band .slider .cap .t{font-weight:500;}
+  .slider .cap{justify-content:flex-start;}
