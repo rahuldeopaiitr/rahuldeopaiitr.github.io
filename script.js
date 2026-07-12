@@ -109,3 +109,20 @@
     go(0); start();
   });
 })();
+
+// ---- Lightweight click-to-play YouTube facade ----
+(function(){
+  document.querySelectorAll('.yt-facade').forEach(function(f){
+    function load(){
+      var id=f.getAttribute('data-yt'); if(!id) return;
+      var ifr=document.createElement('iframe');
+      ifr.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
+      ifr.title='YouTube video player';
+      ifr.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      ifr.allowFullscreen=true;
+      f.innerHTML=''; f.appendChild(ifr); f.removeAttribute('role'); f.style.cursor='default';
+    }
+    f.addEventListener('click',load);
+    f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); load(); } });
+  });
+})();

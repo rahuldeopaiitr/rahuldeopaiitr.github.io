@@ -216,3 +216,13 @@
   footer{position:relative;padding-top:46px;}
   footer::before{content:"";position:absolute;top:0;left:0;right:0;height:30px;pointer-events:none;
     background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%271200%27%20height%3D%2734%27%20viewBox%3D%270%200%201200%2034%27%3E%3Cpath%20d%3D%27M0%2C16%20C200%2C4%20400%2C28%20600%2C16%20S1000%2C4%201200%2C16%20L1200%2C34%20L0%2C34%20Z%27%20fill%3D%27%2316697A%27%20fill-opacity%3D%270.12%27/%3E%3Cpath%20d%3D%27M0%2C22%20C200%2C10%20400%2C34%20600%2C22%20S1000%2C10%201200%2C22%20L1200%2C34%20L0%2C34%20Z%27%20fill%3D%27%230F4C5C%27%20fill-opacity%3D%270.09%27/%3E%3C/svg%3E");background-size:1200px 30px;background-repeat:repeat-x;background-position:top;}
+
+  /* click-to-play YouTube facade */
+  .yt-facade{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;cursor:pointer;border:1px solid var(--line);background:#0b1418;}
+  .yt-facade img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s,opacity .3s;}
+  .yt-facade:hover img{transform:scale(1.04);opacity:.85;}
+  .yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:58px;height:40px;border-radius:9px;
+    background:rgba(15,76,92,.92);display:flex;align-items:center;justify-content:center;pointer-events:none;transition:background .2s,transform .2s;}
+  .yt-facade:hover .yt-play{background:var(--teal);transform:translate(-50%,-50%) scale(1.06);}
+  .yt-play::before{content:"";border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff;margin-left:3px;}
+  .yt-facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
