@@ -29,7 +29,7 @@
   .backlink{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:13px;
     letter-spacing:.03em;color:var(--teal);margin-bottom:22px;}
   .backlink:hover{color:var(--teal-deep);}
-  .brand img{width:54px;height:54px;object-fit:contain;}
+  .brand img{width:69px;height:69px;object-fit:contain;}
   .brand-txt{display:flex;flex-direction:column;line-height:1.12;}
   .brand-txt b{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:.01em;}
   .brand-txt em{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.05em;
