@@ -87,6 +87,7 @@
       slides.forEach(function(s){track.appendChild(s);});
     }
     var N=slides.length, i=0, timer=null, DELAY=4000;
+    var autoplay=wrap.getAttribute('data-autoplay')!=='false';
     var dotsWrap=wrap.querySelector('.slider-dots'), dots=[];
     if(dotsWrap){
       for(var d=0;d<N;d++){(function(d){
@@ -97,7 +98,7 @@
     }
     function go(n){ i=((n%N)+N)%N; track.style.transform='translateX(-'+(i*100)+'%)'; dots.forEach(function(b,x){b.classList.toggle('active',x===i);}); }
     function next(){go(i+1);} function prev(){go(i-1);}
-    function start(){ if(!reduce && !timer && N>1) timer=setInterval(next,DELAY); }
+    function start(){ if(autoplay && !reduce && !timer && N>1) timer=setInterval(next,DELAY); }
     function stop(){ if(timer){clearInterval(timer);timer=null;} }
     function restart(){ stop(); start(); }
     var nb=wrap.querySelector('.slider-btn.next'), pb=wrap.querySelector('.slider-btn.prev');
