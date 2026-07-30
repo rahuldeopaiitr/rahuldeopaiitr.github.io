@@ -262,10 +262,6 @@
       <button class="cf-arrow cf-next" id="cfNext" type="button" aria-label="Show next publication">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
       </button>
-      <a class="cf-doi" id="cfDoi" target="_blank" rel="noopener" aria-label="Open the front publication via DOI in a new tab">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 14 21 3M15 3h6v6M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
-        Open via DOI
-      </a>
       <div class="cf-sr" aria-live="polite" id="cfLive"></div>
     </div>
 
@@ -449,7 +445,7 @@
     {cover:"assets/cover_stoten.jpg", title:"Urbanization–climate change–flood risk nexus in densely populated urban megacities", journal:"Science of the Total Environment", year:"2024", doi:"https://doi.org/10.1016/j.scitotenv.2024.175882"}
   ];
   var stage=document.getElementById('cfStage'); if(!stage) return;
-  var cf=document.getElementById('cf'), live=document.getElementById('cfLive'), doi=document.getElementById('cfDoi');
+  var cf=document.getElementById('cf'), live=document.getElementById('cfLive');
   var n=PUBS.length, active=0, cards=[];
   PUBS.forEach(function(p){
     var card=document.createElement('div'); card.className='cf-card';
@@ -475,7 +471,6 @@
       card.querySelector('a').tabIndex=hidden?-1:0;
     });
     var p=PUBS[active];
-    if(doi){ doi.href=p.doi; doi.setAttribute('aria-label','Open \u201C'+p.title+'\u201D ('+p.journal+') via DOI in a new tab'); }
     if(live) live.textContent=p.journal+' ('+p.year+'): '+p.title;
   }
   function setActive(k){ active=((k%n)+n)%n; render(); }
@@ -495,11 +490,11 @@
   });
   function endDrag(){ if(!down) return; down=false; if(dragging){ dragging=false; stage.classList.remove('dragging'); try{ stage.releasePointerCapture(pid); }catch(_){} } }
   stage.addEventListener('pointerup',endDrag); stage.addEventListener('pointercancel',endDrag);
-  // front cover click -> open DOI (native); side cover click -> rotate to front; a drag -> never navigates
-  cards.forEach(function(card,i){
+  // Clicking ANY cover opens that paper's own DOI (native anchor navigation).
+  // Only a real drag/swipe is suppressed so it never opens a link.
+  cards.forEach(function(card){
     card.querySelector('a').addEventListener('click',function(e){
-      if(moved>10){ e.preventDefault(); return; }
-      if(offsetOf(i)!==0){ e.preventDefault(); setActive(i); }
+      if(moved>10){ e.preventDefault(); }
     });
   });
   window.addEventListener('resize',function(){ measure(); render(); });

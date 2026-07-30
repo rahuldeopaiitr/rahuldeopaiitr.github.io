@@ -320,19 +320,8 @@
   .cf-arrow svg{ width:28px; height:28px; }
   .cf-prev{ left:0; } .cf-next{ right:0; }
 
-  /* "Open via DOI" chip on the front cover */
-  .cf-doi{ position:absolute; z-index:25; bottom:13%; left:50%; transform:translateX(18%);
-    display:inline-flex; align-items:center; gap:7px; padding:8px 14px; border-radius:999px;
-    background:rgba(255,255,255,.94); border:1px solid var(--line); color:var(--cf-accent-deep);
-    font-family:var(--mono); font-size:12px; letter-spacing:.02em; white-space:nowrap; text-decoration:none;
-    box-shadow:0 6px 18px rgba(14,27,36,.18); transition:background .2s,color .2s,border-color .2s,transform .2s; }
-  .cf-doi:hover{ background:var(--cf-accent); color:#fff; border-color:var(--cf-accent); transform:translateX(18%) translateY(-2px); }
-  .cf-doi svg{ width:14px; height:14px; }
-
-  .cf-sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.cf-sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
   @media(max-width:560px){
     .cf-wrap{ padding:0 32px; }
-    .cf-doi{ left:50%; transform:translateX(-50%); bottom:10%; }
-    .cf-doi:hover{ transform:translateX(-50%) translateY(-2px); }
   }
   @media(prefers-reduced-motion:reduce){ .cf-card,.cf-card a{ transition:none; } }
