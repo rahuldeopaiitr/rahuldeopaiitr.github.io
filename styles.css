@@ -284,3 +284,32 @@
     background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%271200%27%20height%3D%27300%27%20viewBox%3D%270%200%201200%20300%27%20preserveAspectRatio%3D%27none%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%2335A9C0%27%20stroke-width%3D%271%27%20stroke-opacity%3D%270.38%27%3E%3Cpath%20d%3D%27M0%2090%20C200%2070%20340%20110%20600%2090%20S1000%2060%201200%2095%27%2F%3E%3Cpath%20d%3D%27M0%20140%20C220%20120%20360%20160%20620%20140%20S1020%20110%201200%20145%27%2F%3E%3Cpath%20d%3D%27M0%20190%20C240%20170%20400%20210%20660%20190%20S1060%20160%201200%20195%27%2F%3E%3Cpath%20d%3D%27M0%20240%20C260%20220%20420%20260%20700%20240%20S1080%20210%201200%20245%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
     background-size:1200px 100%; background-position:center; background-repeat:no-repeat;
   }
+
+  /* =====================================================================
+     3D CYLINDRICAL PUBLICATIONS CAROUSEL (covers only, transparent).
+     Replaces the old static .covers grid in #publications.
+     ===================================================================== */
+  .cf-wrap{ --cf-accent:#16697A; --cf-accent-deep:#0F4C5C; --cf-card-w:clamp(150px,38vw,230px);
+    position:relative; width:100%; margin:6px 0 8px; display:flex; flex-direction:column; align-items:center;
+    background:transparent; user-select:none; -webkit-user-select:none; }
+  .cf{ position:relative; width:100%; height:clamp(280px,54vw,400px); perspective:1200px; outline:none; }
+  .cf-stage{ position:absolute; inset:0; transform-style:preserve-3d; touch-action:pan-y; cursor:grab; }
+  .cf-stage.dragging{ cursor:grabbing; }
+  .cf-card{ position:absolute; left:50%; top:50%; width:var(--cf-card-w); will-change:transform,opacity;
+    transition:transform .55s cubic-bezier(.22,.61,.36,1),opacity .55s ease; transform-style:preserve-3d; }
+  .cf-card a{ display:block; outline:none; -webkit-tap-highlight-color:transparent; border-radius:6px;
+    transition:transform .3s ease,filter .3s ease; }
+  .cf-card img{ display:block; width:100%; height:auto; border-radius:6px;
+    filter:drop-shadow(0 16px 30px rgba(14,27,36,.28)); pointer-events:none; }
+  .cf-card.is-front a:hover, .cf-card a:focus-visible{ transform:translateY(-6px) scale(1.04);
+    filter:drop-shadow(0 0 12px rgba(22,105,122,.5)) drop-shadow(0 20px 36px rgba(14,27,36,.32)); }
+  .cf-card a:focus-visible{ outline:2.5px solid var(--cf-accent); outline-offset:6px; }
+  .cf-controls{ display:flex; gap:1.2rem; margin-top:.5rem; }
+  .cf-btn{ width:46px; height:46px; border-radius:50%; border:1px solid var(--line);
+    background:#fff; color:var(--cf-accent-deep); display:grid; place-items:center; cursor:pointer;
+    transition:background .18s ease,border-color .18s ease,transform .18s ease,color .18s ease; }
+  .cf-btn:hover{ background:var(--cf-accent); border-color:var(--cf-accent); color:#fff; }
+  .cf-btn:active{ transform:scale(.92); }
+  .cf-btn svg{ width:22px; height:22px; }
+  .cf-sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  @media(prefers-reduced-motion:reduce){ .cf-card,.cf-card a{ transition:none; } }

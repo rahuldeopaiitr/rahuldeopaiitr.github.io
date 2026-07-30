@@ -251,27 +251,20 @@
     <p class="eyebrow">§ 03 — Output</p>
     <h2>Publications</h2>
 
-    <div class="covers">
-      <figure>
-        <a href="https://doi.org/10.1016/j.scitotenv.2024.175882" target="_blank" rel="noopener" title="Open the paper in Science of the Total Environment">
-          <img src="assets/cover_stoten.jpg" alt="Science of the Total Environment — open paper"></a>
-        <figcaption>Science of the Total Environment</figcaption>
-      </figure>
-      <figure>
-        <a href="https://doi.org/10.1016/j.wroa.2025.100396" target="_blank" rel="noopener" title="Open the HyEco paper in Water Research X">
-          <img src="assets/cover_wrx.jpg" alt="Water Research X — open paper"></a>
-        <figcaption>Water Research X</figcaption>
-      </figure>
-      <figure>
-        <a href="https://doi.org/10.1007/s11069-025-07699-x" target="_blank" rel="noopener" title="Open the paper in Natural Hazards">
-          <img src="assets/cover_nh.jpg" alt="Natural Hazards — open paper"></a>
-        <figcaption>Natural Hazards</figcaption>
-      </figure>
-      <figure>
-        <a href="https://doi.org/10.1016/j.jhydrol.2026.135999" target="_blank" rel="noopener" title="Open the paper in Journal of Hydrology">
-          <img src="assets/cover_jhy.jpg" alt="Journal of Hydrology — open paper"></a>
-        <figcaption>Journal of Hydrology</figcaption>
-      </figure>
+    <!-- 3D cylindrical publication carousel (covers only; click a cover to open its DOI) -->
+    <div class="cf-wrap">
+      <div class="cf" id="cf" role="group" aria-roledescription="carousel" aria-label="Research publications — rotate to browse">
+        <div class="cf-stage" id="cfStage"><!-- covers injected by script --></div>
+      </div>
+      <div class="cf-controls">
+        <button class="cf-btn" id="cfPrev" type="button" aria-label="Rotate to previous publication">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <button class="cf-btn" id="cfNext" type="button" aria-label="Rotate to next publication">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="cf-sr" aria-live="polite" id="cfLive"></div>
     </div>
 
     <p class="subhead">Journal Articles</p>
@@ -442,6 +435,56 @@
     t.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); play(); } });
   });
   go(0);
+})();
+</script>
+<script>
+/* 3D cylindrical publications carousel — real covers, titles & DOIs */
+(function(){
+  var PUBS=[
+    {cover:"assets/cover_jhy.jpg", title:"Integrated hydrodynamic–water-quality modelling and QMRA of flood-borne human-health risk during the 2023 Delhi flood", journal:"Journal of Hydrology", year:"2026", doi:"https://doi.org/10.1016/j.jhydrol.2026.135999"},
+    {cover:"assets/cover_nh.jpg", title:"Cascading impacts of 2025 June–July multi-hazard episodes in the Western Himalayas", journal:"Natural Hazards", year:"2025", doi:"https://doi.org/10.1007/s11069-025-07699-x"},
+    {cover:"assets/cover_wrx.jpg", title:"HyEco: a hybrid hydrodynamic-cum-ecological modelling framework for flood and human-health risks", journal:"Water Research X", year:"2025", doi:"https://doi.org/10.1016/j.wroa.2025.100396"},
+    {cover:"assets/cover_stoten.jpg", title:"Urbanization–climate change–flood risk nexus in densely populated urban megacities", journal:"Science of the Total Environment", year:"2024", doi:"https://doi.org/10.1016/j.scitotenv.2024.175882"}
+  ];
+  var stage=document.getElementById('cfStage'); if(!stage) return;
+  var cf=document.getElementById('cf'), live=document.getElementById('cfLive');
+  var n=PUBS.length, active=0, cards=[];
+  PUBS.forEach(function(p){
+    var card=document.createElement('div'); card.className='cf-card';
+    var a=document.createElement('a'); a.href=p.doi; a.target='_blank'; a.rel='noopener';
+    a.setAttribute('aria-label','Open “'+p.title+'” — '+p.journal+' ('+p.year+'). Opens the DOI in a new tab.');
+    var img=document.createElement('img'); img.src=p.cover; img.alt=p.journal+' ('+p.year+') — '+p.title; img.loading='lazy';
+    a.appendChild(img); card.appendChild(a); stage.appendChild(card); cards.push(card);
+  });
+  var GAP,DEPTH,ROT=48,SCALE_STEP=0.16,MAX_VISIBLE=3;
+  function measure(){ var w=cards[0].getBoundingClientRect().width||200; GAP=w*0.72; DEPTH=w*0.95; }
+  function offsetOf(i){ var o=i-active; if(o>n/2)o-=n; if(o<-n/2)o+=n; return o; }
+  function render(){
+    cards.forEach(function(card,i){
+      var o=offsetOf(i), ao=Math.abs(o), hidden=ao>MAX_VISIBLE;
+      var scale=Math.max(0.4,1-ao*SCALE_STEP), opacity=hidden?0:Math.max(0,1-ao*0.34);
+      card.style.transform='translate(-50%,-50%) translateX('+(o*GAP)+'px) translateZ('+(-ao*DEPTH)+'px) rotateY('+(-o*ROT)+'deg) scale('+scale+')';
+      card.style.opacity=opacity; card.style.zIndex=String(100-ao);
+      card.style.pointerEvents=hidden?'none':'auto';
+      card.classList.toggle('is-front',o===0);
+      card.querySelector('a').tabIndex=hidden?-1:0;
+    });
+    var p=PUBS[active]; if(live) live.textContent=p.journal+' ('+p.year+'): '+p.title;
+  }
+  function setActive(k){ active=((k%n)+n)%n; render(); }
+  document.getElementById('cfPrev').addEventListener('click',function(){setActive(active-1);});
+  document.getElementById('cfNext').addEventListener('click',function(){setActive(active+1);});
+  cf.tabIndex=0;
+  cf.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft'){e.preventDefault();setActive(active-1);} else if(e.key==='ArrowRight'){e.preventDefault();setActive(active+1);} });
+  var dragging=false,lastX=0,accum=0,moved=0,stepPx=70;
+  stage.addEventListener('pointerdown',function(e){ dragging=true; lastX=e.clientX; accum=0; moved=0; stepPx=Math.max(48,(cards[0].getBoundingClientRect().width||200)*0.5); stage.classList.add('dragging'); stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointermove',function(e){ if(!dragging)return; var dx=e.clientX-lastX; lastX=e.clientX; accum+=dx; moved+=Math.abs(dx); while(accum>stepPx){setActive(active-1);accum-=stepPx;} while(accum<-stepPx){setActive(active+1);accum+=stepPx;} });
+  function endDrag(e){ if(!dragging)return; dragging=false; stage.classList.remove('dragging'); try{stage.releasePointerCapture(e.pointerId);}catch(_){} }
+  stage.addEventListener('pointerup',endDrag); stage.addEventListener('pointercancel',endDrag);
+  cards.forEach(function(card){ card.querySelector('a').addEventListener('click',function(e){ if(moved>10) e.preventDefault(); }); });
+  window.addEventListener('resize',function(){ measure(); render(); });
+  measure(); render();
+  window.addEventListener('load',function(){ measure(); render(); });
 })();
 </script>
 <script src="script.js"></script>
