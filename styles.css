@@ -241,3 +241,46 @@
     .about-side .video-block .video-slider .slider-track{height:100%;}
     .about-side .video-block .video-slider .slide{height:100%;aspect-ratio:auto;}
   }
+
+
+  /* =====================================================================
+     THEME OVERRIDE — dark "flood" palette for HERO + FOOTER only.
+     Appended last so it overrides the rules above. Colours only:
+     no layout, content, or orientation is changed. Remove this whole
+     block to revert to the original light hero/footer.
+     ===================================================================== */
+  :root{
+    --abyss:#071E29; --deep:#0C3040; --tide-2:#12718A; --shallow:#35A9C0;
+  }
+
+  /* ---- HERO (dark) ---- */
+  .hero{ background:var(--abyss); }
+  .hero-bg{ opacity:.16; filter:grayscale(.25) brightness(.65); }
+  .hero-bg::after{ background:linear-gradient(180deg, rgba(7,30,41,.55), var(--abyss) 92%); }
+  .hero .eyebrow{ color:#8FC7D4; }
+  .hero .eyebrow::before{ background:var(--shallow); }
+  .hero h1{ color:#ffffff; }
+  .hero .tagline{ color:#8FE0EC; }
+  .hero .role{ color:#DCEBEE; }
+  .hero .affil{ color:#9FBEC6; }
+  .hero p.lede{ color:#C9DEE3; }
+  .hero .icons a{ color:#E4EEF0; background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.18); }
+  .hero .icons a:hover{ color:#ffffff; background:rgba(53,169,192,.16); border-color:var(--shallow); }
+  .hero .portrait .photo{ border-color:rgba(255,255,255,.20); background:var(--deep); }
+  .hero .portrait .cap{ color:#8FB2BA; }
+  .hero .hydro .grid{ stroke:rgba(255,255,255,.14); }
+  .hero .hydro .flow{ stroke:var(--shallow); }
+  .hero .hydro .dot{ fill:#DCEBEE; }
+
+  /* ---- FOOTER (dark, contour-wave design) ---- */
+  footer{ position:relative; overflow:hidden; background:var(--abyss); border-top:none; padding:52px 0 34px; }
+  footer .wrap{ position:relative; z-index:1; color:#8FB2BA; }
+  footer .wrap span{ color:#8FB2BA; }
+  footer a{ color:#C6DBE0; }
+  footer a:hover{ color:var(--shallow); }
+  footer::before{
+    content:""; position:absolute; inset:0; top:0; height:100%; z-index:0; opacity:.55;
+    pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%271200%27%20height%3D%27300%27%20viewBox%3D%270%200%201200%20300%27%20preserveAspectRatio%3D%27none%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%2335A9C0%27%20stroke-width%3D%271%27%20stroke-opacity%3D%270.38%27%3E%3Cpath%20d%3D%27M0%2090%20C200%2070%20340%20110%20600%2090%20S1000%2060%201200%2095%27%2F%3E%3Cpath%20d%3D%27M0%20140%20C220%20120%20360%20160%20620%20140%20S1020%20110%201200%20145%27%2F%3E%3Cpath%20d%3D%27M0%20190%20C240%20170%20400%20210%20660%20190%20S1060%20160%201200%20195%27%2F%3E%3Cpath%20d%3D%27M0%20240%20C260%20220%20420%20260%20700%20240%20S1080%20210%201200%20245%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    background-size:1200px 100%; background-position:center; background-repeat:no-repeat;
+  }
