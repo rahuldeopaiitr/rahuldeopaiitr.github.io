@@ -455,20 +455,26 @@
     var img=document.createElement('img'); img.src=p.cover; img.alt=p.journal+' ('+p.year+') — '+p.title; img.loading='lazy';
     frame.appendChild(img); a.appendChild(frame); card.appendChild(a); stage.appendChild(card); cards.push(card);
   });
-  var GAP=150, ROT=52;
-  function measure(){ var w=cards[0].getBoundingClientRect().width||210; GAP=w*0.66; }
   function offsetOf(i){ var o=((i-active)%n+n)%n; if(o>n/2)o-=n; return o; }
   function render(){
+    // width read via offsetWidth (ignores transforms) so the fan never collapses
+    var w = cards[0].offsetWidth || 220;
+    var G = w*0.74, ROT=44, ZN=w*0.10, ZB=w*0.55;
     cards.forEach(function(card,i){
-      var o=offsetOf(i), ao=Math.abs(o), hidden=ao>=2, t, z, op;
-      if(o===0){ t='translate(-50%,-50%) translateZ(46px) scale(1)'; z=100; op=1; }
-      else if(o>0){ t='translate(-50%,-50%) translateX('+GAP+'px) translateZ(-120px) rotateY(-'+ROT+'deg) scale(.8)'; z=90; op=.96; }
-      else { t='translate(-50%,-50%) translateX(-'+GAP+'px) translateZ(-120px) rotateY('+ROT+'deg) scale(.8)'; z=90; op=.96; }
-      if(hidden) op=0;
-      card.style.transform=t; card.style.opacity=op; card.style.zIndex=String(z-ao);
-      card.style.pointerEvents=hidden?'none':'auto';
+      var o=offsetOf(i), t, z, op;
+      if(o===0){                 // front: flat, large
+        t='translate(-50%,-50%) translateZ(0px) scale(1)'; z=40; op=1;
+      } else if(o===1){          // right: curve away
+        t='translate(-50%,-50%) translateX('+G+'px) translateZ(-'+ZN+'px) rotateY(-'+ROT+'deg) scale(.84)'; z=30; op=1;
+      } else if(o===-1){         // left: curve away
+        t='translate(-50%,-50%) translateX(-'+G+'px) translateZ(-'+ZN+'px) rotateY('+ROT+'deg) scale(.84)'; z=30; op=1;
+      } else {                   // far cover(s): layered behind for depth
+        t='translate(-50%,-50%) translateZ(-'+ZB+'px) scale(.72)'; z=10; op=.5;
+      }
+      card.style.transform=t; card.style.opacity=op; card.style.zIndex=String(z);
+      card.style.pointerEvents='auto';
       card.classList.toggle('is-front',o===0);
-      card.querySelector('a').tabIndex=hidden?-1:0;
+      card.querySelector('a').tabIndex=0;
     });
     var p=PUBS[active];
     if(live) live.textContent=p.journal+' ('+p.year+'): '+p.title;
@@ -481,7 +487,7 @@
   // Pointer drag: capture ONLY after real movement, so a plain tap still fires
   // its native click and the cover's DOI link opens normally.
   var down=false, dragging=false, startX=0, lastX=0, accum=0, moved=0, stepPx=80, pid=null;
-  stage.addEventListener('pointerdown',function(e){ down=true; dragging=false; startX=lastX=e.clientX; accum=0; moved=0; pid=e.pointerId; stepPx=Math.max(56,(cards[0].getBoundingClientRect().width||210)*0.55); });
+  stage.addEventListener('pointerdown',function(e){ down=true; dragging=false; startX=lastX=e.clientX; accum=0; moved=0; pid=e.pointerId; stepPx=Math.max(56,(cards[0].offsetWidth||210)*0.55); });
   stage.addEventListener('pointermove',function(e){
     if(!down) return;
     var dx=e.clientX-lastX; lastX=e.clientX; moved+=Math.abs(dx);
@@ -497,9 +503,9 @@
       if(moved>10){ e.preventDefault(); }
     });
   });
-  window.addEventListener('resize',function(){ measure(); render(); });
-  measure(); render();
-  window.addEventListener('load',function(){ measure(); render(); });
+  window.addEventListener('resize',render);
+  render();
+  window.addEventListener('load',render);
 })();
 </script>
 <script src="script.js"></script>
