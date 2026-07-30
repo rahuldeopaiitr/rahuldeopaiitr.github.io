@@ -251,19 +251,21 @@
     <p class="eyebrow">§ 03 — Output</p>
     <h2>Publications</h2>
 
-    <!-- 3D cylindrical publication carousel (covers only; click a cover to open its DOI) -->
+    <!-- 3D cylindrical publication coverflow (covers only; front cover opens its DOI) -->
     <div class="cf-wrap">
+      <button class="cf-arrow cf-prev" id="cfPrev" type="button" aria-label="Show previous publication">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
       <div class="cf" id="cf" role="group" aria-roledescription="carousel" aria-label="Research publications — rotate to browse">
         <div class="cf-stage" id="cfStage"><!-- covers injected by script --></div>
       </div>
-      <div class="cf-controls">
-        <button class="cf-btn" id="cfPrev" type="button" aria-label="Rotate to previous publication">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
-        </button>
-        <button class="cf-btn" id="cfNext" type="button" aria-label="Rotate to next publication">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-        </button>
-      </div>
+      <button class="cf-arrow cf-next" id="cfNext" type="button" aria-label="Show next publication">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <a class="cf-doi" id="cfDoi" target="_blank" rel="noopener" aria-label="Open the front publication via DOI in a new tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 14 21 3M15 3h6v6M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+        Open via DOI
+      </a>
       <div class="cf-sr" aria-live="polite" id="cfLive"></div>
     </div>
 
@@ -438,7 +440,7 @@
 })();
 </script>
 <script>
-/* 3D cylindrical publications carousel — real covers, titles & DOIs */
+/* 3D cylindrical publication coverflow — real covers, titles & DOIs */
 (function(){
   var PUBS=[
     {cover:"assets/cover_jhy.jpg", title:"Integrated hydrodynamic–water-quality modelling and QMRA of flood-borne human-health risk during the 2023 Delhi flood", journal:"Journal of Hydrology", year:"2026", doi:"https://doi.org/10.1016/j.jhydrol.2026.135999"},
@@ -447,41 +449,52 @@
     {cover:"assets/cover_stoten.jpg", title:"Urbanization–climate change–flood risk nexus in densely populated urban megacities", journal:"Science of the Total Environment", year:"2024", doi:"https://doi.org/10.1016/j.scitotenv.2024.175882"}
   ];
   var stage=document.getElementById('cfStage'); if(!stage) return;
-  var cf=document.getElementById('cf'), live=document.getElementById('cfLive');
+  var cf=document.getElementById('cf'), live=document.getElementById('cfLive'), doi=document.getElementById('cfDoi');
   var n=PUBS.length, active=0, cards=[];
   PUBS.forEach(function(p){
     var card=document.createElement('div'); card.className='cf-card';
     var a=document.createElement('a'); a.href=p.doi; a.target='_blank'; a.rel='noopener';
-    a.setAttribute('aria-label','Open “'+p.title+'” — '+p.journal+' ('+p.year+'). Opens the DOI in a new tab.');
+    a.setAttribute('aria-label','Open \u201C'+p.title+'\u201D — '+p.journal+' ('+p.year+'). Opens the DOI in a new tab.');
+    var frame=document.createElement('div'); frame.className='cf-frame';
     var img=document.createElement('img'); img.src=p.cover; img.alt=p.journal+' ('+p.year+') — '+p.title; img.loading='lazy';
-    a.appendChild(img); card.appendChild(a); stage.appendChild(card); cards.push(card);
+    frame.appendChild(img); a.appendChild(frame); card.appendChild(a); stage.appendChild(card); cards.push(card);
   });
-  var GAP,DEPTH,ROT=48,SCALE_STEP=0.16,MAX_VISIBLE=3;
-  function measure(){ var w=cards[0].getBoundingClientRect().width||200; GAP=w*0.72; DEPTH=w*0.95; }
-  function offsetOf(i){ var o=i-active; if(o>n/2)o-=n; if(o<-n/2)o+=n; return o; }
+  var GAP=150, ROT=52;
+  function measure(){ var w=cards[0].getBoundingClientRect().width||210; GAP=w*0.66; }
+  function offsetOf(i){ var o=((i-active)%n+n)%n; if(o>n/2)o-=n; return o; }
   function render(){
     cards.forEach(function(card,i){
-      var o=offsetOf(i), ao=Math.abs(o), hidden=ao>MAX_VISIBLE;
-      var scale=Math.max(0.4,1-ao*SCALE_STEP), opacity=hidden?0:Math.max(0,1-ao*0.34);
-      card.style.transform='translate(-50%,-50%) translateX('+(o*GAP)+'px) translateZ('+(-ao*DEPTH)+'px) rotateY('+(-o*ROT)+'deg) scale('+scale+')';
-      card.style.opacity=opacity; card.style.zIndex=String(100-ao);
+      var o=offsetOf(i), ao=Math.abs(o), hidden=ao>=2, t, z, op;
+      if(o===0){ t='translate(-50%,-50%) translateZ(46px) scale(1)'; z=100; op=1; }
+      else if(o>0){ t='translate(-50%,-50%) translateX('+GAP+'px) translateZ(-120px) rotateY(-'+ROT+'deg) scale(.8)'; z=90; op=.96; }
+      else { t='translate(-50%,-50%) translateX(-'+GAP+'px) translateZ(-120px) rotateY('+ROT+'deg) scale(.8)'; z=90; op=.96; }
+      if(hidden) op=0;
+      card.style.transform=t; card.style.opacity=op; card.style.zIndex=String(z-ao);
       card.style.pointerEvents=hidden?'none':'auto';
       card.classList.toggle('is-front',o===0);
       card.querySelector('a').tabIndex=hidden?-1:0;
     });
-    var p=PUBS[active]; if(live) live.textContent=p.journal+' ('+p.year+'): '+p.title;
+    var p=PUBS[active];
+    if(doi){ doi.href=p.doi; doi.setAttribute('aria-label','Open \u201C'+p.title+'\u201D ('+p.journal+') via DOI in a new tab'); }
+    if(live) live.textContent=p.journal+' ('+p.year+'): '+p.title;
   }
   function setActive(k){ active=((k%n)+n)%n; render(); }
   document.getElementById('cfPrev').addEventListener('click',function(){setActive(active-1);});
   document.getElementById('cfNext').addEventListener('click',function(){setActive(active+1);});
   cf.tabIndex=0;
   cf.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft'){e.preventDefault();setActive(active-1);} else if(e.key==='ArrowRight'){e.preventDefault();setActive(active+1);} });
-  var dragging=false,lastX=0,accum=0,moved=0,stepPx=70;
-  stage.addEventListener('pointerdown',function(e){ dragging=true; lastX=e.clientX; accum=0; moved=0; stepPx=Math.max(48,(cards[0].getBoundingClientRect().width||200)*0.5); stage.classList.add('dragging'); stage.setPointerCapture(e.pointerId); });
+  var dragging=false,lastX=0,accum=0,moved=0,stepPx=80;
+  stage.addEventListener('pointerdown',function(e){ dragging=true; lastX=e.clientX; accum=0; moved=0; stepPx=Math.max(56,(cards[0].getBoundingClientRect().width||210)*0.55); stage.classList.add('dragging'); stage.setPointerCapture(e.pointerId); });
   stage.addEventListener('pointermove',function(e){ if(!dragging)return; var dx=e.clientX-lastX; lastX=e.clientX; accum+=dx; moved+=Math.abs(dx); while(accum>stepPx){setActive(active-1);accum-=stepPx;} while(accum<-stepPx){setActive(active+1);accum+=stepPx;} });
   function endDrag(e){ if(!dragging)return; dragging=false; stage.classList.remove('dragging'); try{stage.releasePointerCapture(e.pointerId);}catch(_){} }
   stage.addEventListener('pointerup',endDrag); stage.addEventListener('pointercancel',endDrag);
-  cards.forEach(function(card){ card.querySelector('a').addEventListener('click',function(e){ if(moved>10) e.preventDefault(); }); });
+  // front cover click -> open DOI; side cover click -> rotate it to front; drag -> never navigates
+  cards.forEach(function(card,i){
+    card.querySelector('a').addEventListener('click',function(e){
+      if(moved>10){ e.preventDefault(); return; }
+      if(offsetOf(i)!==0){ e.preventDefault(); setActive(i); }
+    });
+  });
   window.addEventListener('resize',function(){ measure(); render(); });
   measure(); render();
   window.addEventListener('load',function(){ measure(); render(); });

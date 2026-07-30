@@ -285,31 +285,54 @@
     background-size:1200px 100%; background-position:center; background-repeat:no-repeat;
   }
 
+
   /* =====================================================================
-     3D CYLINDRICAL PUBLICATIONS CAROUSEL (covers only, transparent).
-     Replaces the old static .covers grid in #publications.
+     3D CYLINDRICAL PUBLICATION COVERFLOW (covers only, transparent bg).
+     Flat prominent centre + symmetric curving sides + side chevrons +
+     "Open via DOI" chip on the front cover.
      ===================================================================== */
-  .cf-wrap{ --cf-accent:#16697A; --cf-accent-deep:#0F4C5C; --cf-card-w:clamp(150px,38vw,230px);
-    position:relative; width:100%; margin:6px 0 8px; display:flex; flex-direction:column; align-items:center;
+  .cf-wrap{ --cf-accent:#16697A; --cf-accent-deep:#0F4C5C; --cf-card-w:clamp(158px,32vw,236px);
+    position:relative; width:100%; margin:12px 0 8px; padding:0 46px;
+    display:flex; align-items:center; justify-content:center;
     background:transparent; user-select:none; -webkit-user-select:none; }
-  .cf{ position:relative; width:100%; height:clamp(280px,54vw,400px); perspective:1200px; outline:none; }
+  .cf{ position:relative; width:100%; max-width:840px; margin:0 auto;
+    height:clamp(330px,50vw,440px); perspective:1300px; outline:none; }
   .cf-stage{ position:absolute; inset:0; transform-style:preserve-3d; touch-action:pan-y; cursor:grab; }
   .cf-stage.dragging{ cursor:grabbing; }
-  .cf-card{ position:absolute; left:50%; top:50%; width:var(--cf-card-w); will-change:transform,opacity;
-    transition:transform .55s cubic-bezier(.22,.61,.36,1),opacity .55s ease; transform-style:preserve-3d; }
-  .cf-card a{ display:block; outline:none; -webkit-tap-highlight-color:transparent; border-radius:6px;
-    transition:transform .3s ease,filter .3s ease; }
-  .cf-card img{ display:block; width:100%; height:auto; border-radius:6px;
-    filter:drop-shadow(0 16px 30px rgba(14,27,36,.28)); pointer-events:none; }
-  .cf-card.is-front a:hover, .cf-card a:focus-visible{ transform:translateY(-6px) scale(1.04);
-    filter:drop-shadow(0 0 12px rgba(22,105,122,.5)) drop-shadow(0 20px 36px rgba(14,27,36,.32)); }
-  .cf-card a:focus-visible{ outline:2.5px solid var(--cf-accent); outline-offset:6px; }
-  .cf-controls{ display:flex; gap:1.2rem; margin-top:.5rem; }
-  .cf-btn{ width:46px; height:46px; border-radius:50%; border:1px solid var(--line);
-    background:#fff; color:var(--cf-accent-deep); display:grid; place-items:center; cursor:pointer;
-    transition:background .18s ease,border-color .18s ease,transform .18s ease,color .18s ease; }
-  .cf-btn:hover{ background:var(--cf-accent); border-color:var(--cf-accent); color:#fff; }
-  .cf-btn:active{ transform:scale(.92); }
-  .cf-btn svg{ width:22px; height:22px; }
+  .cf-card{ position:absolute; left:50%; top:50%; width:var(--cf-card-w);
+    transform-style:preserve-3d; will-change:transform,opacity;
+    transition:transform .6s cubic-bezier(.22,.61,.36,1), opacity .5s ease; }
+  .cf-card a{ display:block; outline:none; border-radius:9px; -webkit-tap-highlight-color:transparent;
+    transition:transform .3s ease; }
+  .cf-frame{ position:relative; width:100%; aspect-ratio:3/4; border-radius:9px; overflow:hidden;
+    background:#fff; box-shadow:0 16px 34px -14px rgba(14,27,36,.34); transition:box-shadow .4s ease; }
+  .cf-frame img{ width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; }
+  .cf-card.is-front .cf-frame{ box-shadow:0 30px 62px -18px rgba(14,27,36,.46), 0 0 0 1px rgba(255,255,255,.65); }
+  .cf-card.is-front a:hover{ transform:translateY(-6px); }
+  .cf-card.is-front a:hover .cf-frame{ box-shadow:0 34px 68px -16px rgba(14,27,36,.5), 0 0 16px rgba(22,105,122,.4); }
+  .cf-card a:focus-visible .cf-frame{ box-shadow:0 0 0 3px var(--cf-accent); }
+
+  /* minimal side chevrons */
+  .cf-arrow{ position:absolute; top:50%; transform:translateY(-50%); z-index:20;
+    width:40px; height:60px; border:none; background:transparent; cursor:pointer;
+    color:#9aa7ad; display:flex; align-items:center; justify-content:center; transition:color .2s ease; }
+  .cf-arrow:hover{ color:var(--cf-accent-deep); }
+  .cf-arrow svg{ width:28px; height:28px; }
+  .cf-prev{ left:0; } .cf-next{ right:0; }
+
+  /* "Open via DOI" chip on the front cover */
+  .cf-doi{ position:absolute; z-index:25; bottom:13%; left:50%; transform:translateX(18%);
+    display:inline-flex; align-items:center; gap:7px; padding:8px 14px; border-radius:999px;
+    background:rgba(255,255,255,.94); border:1px solid var(--line); color:var(--cf-accent-deep);
+    font-family:var(--mono); font-size:12px; letter-spacing:.02em; white-space:nowrap; text-decoration:none;
+    box-shadow:0 6px 18px rgba(14,27,36,.18); transition:background .2s,color .2s,border-color .2s,transform .2s; }
+  .cf-doi:hover{ background:var(--cf-accent); color:#fff; border-color:var(--cf-accent); transform:translateX(18%) translateY(-2px); }
+  .cf-doi svg{ width:14px; height:14px; }
+
   .cf-sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  @media(max-width:560px){
+    .cf-wrap{ padding:0 32px; }
+    .cf-doi{ left:50%; transform:translateX(-50%); bottom:10%; }
+    .cf-doi:hover{ transform:translateX(-50%) translateY(-2px); }
+  }
   @media(prefers-reduced-motion:reduce){ .cf-card,.cf-card a{ transition:none; } }
