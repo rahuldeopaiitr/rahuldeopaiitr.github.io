@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activities &amp; Gallery — Rahul Deopa</title>
+<meta name="description" content="Photo gallery — conferences, workshops, co-curricular activities and the Delhi 2023 field visit of Rahul Deopa, IIT Roorkee.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .g-hero{background:linear-gradient(120deg,#071E29,#0C3B4A);color:#fff;padding:clamp(2rem,5vw,3rem) 0;}
+  .g-hero h1{color:#fff;font-size:clamp(1.8rem,4vw,2.6rem);margin:6px 0 4px;}
+  .g-hero .eyebrow{color:var(--water);} .g-hero p{color:#C3D7DC;margin:0;}
+  .gsec{padding-block:clamp(1.6rem,3.5vw,2.6rem);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+  .gcell{position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--panel);cursor:pointer;border:1px solid var(--line);padding:0;}
+  .gcell img{width:100%;height:100%;object-fit:cover;transition:transform .3s;display:block;}
+  .gcell:hover img{transform:scale(1.05);}
+  .gcell:focus-visible{outline:2.5px solid var(--water);outline-offset:2px;}
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:300;background:rgba(7,30,41,.94);display:none;align-items:center;justify-content:center;}
+  .lb.open{display:flex;}
+  .lb img{max-width:92vw;max-height:82vh;border-radius:8px;box-shadow:0 30px 80px -20px #000;}
+  .lb .cap{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#DCEBEE;font-size:14px;font-family:var(--mono);padding:0 20px;}
+  .lb .x{position:absolute;top:16px;right:18px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:22px;cursor:pointer;}
+  .lb .x:hover{background:var(--teal-2);}
+  .lb .nav{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:60px;border:none;background:rgba(255,255,255,.10);color:#fff;font-size:30px;cursor:pointer;border-radius:8px;}
+  .lb .nav:hover{background:var(--teal-2);} .lb .prev{left:14px;} .lb .next{right:14px;}
+  @media(max-width:560px){.grid{grid-template-columns:repeat(2,1fr);}.lb .nav{width:40px;font-size:24px;}}
+</style>
+</head>
+<body>
+<a class="skip" href="#gallery">Skip to content</a>
+<header>
+  <nav class="nav">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt="RD logo"><span class="brand-txt"><b>Rahul Deopa</b><em>PhD Scholar</em></span></a>
+    <ul class="menu" id="menu">
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#research">Research</a></li>
+      <li><a href="index.html#publications">Publications</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="gallery.html">Activities</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a class="connect" href="index.html#contact">Let's Connect</a>
+    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false">MENU</button>
+  </nav>
+</header>
+
+<div class="g-hero"><div class="wrap">
+  <p class="eyebrow">Activities</p>
+  <h1>Photo Gallery</h1>
+  <p>Conferences, workshops, research engagements, co-curricular activities and field work.</p>
+</div></div>
+
+<main id="gallery">
+  <section class="gsec"><div class="wrap">
+    <div class="tab"><h2>Conferences &amp; Engagements</h2></div>
+    <div class="grid"><button class="gcell" type="button" data-cap="RASTER 2023 — Satellite Technologies for Hydro-climatological Extremes, IIT Roorkee" aria-label="RASTER 2023 — Satellite Technologies for Hydro-climatological Extremes, IIT Roorkee"><img src="assets/conferences/conf-01.jpg" alt="RASTER 2023 — Satellite Technologies for Hydro-climatological Extremes, IIT Roorkee" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="RASTER 2023 — ISRO capacity-building programme, IIT Roorkee" aria-label="RASTER 2023 — ISRO capacity-building programme, IIT Roorkee"><img src="assets/conferences/conf-02.jpg" alt="RASTER 2023 — ISRO capacity-building programme, IIT Roorkee" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="ICRC-CORDEX 2023 — Trieste, Italy" aria-label="ICRC-CORDEX 2023 — Trieste, Italy"><img src="assets/conferences/conf-03.jpg" alt="ICRC-CORDEX 2023 — Trieste, Italy" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Poster — ICRC-CORDEX 2023, Trieste" aria-label="Poster — ICRC-CORDEX 2023, Trieste"><img src="assets/conferences/conf-04.jpg" alt="Poster — ICRC-CORDEX 2023, Trieste" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Poster presentation — ICRC-CORDEX 2023, Trieste" aria-label="Poster presentation — ICRC-CORDEX 2023, Trieste"><img src="assets/conferences/conf-05.jpg" alt="Poster presentation — ICRC-CORDEX 2023, Trieste" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Urban Flood Modelling course — BITS Hyderabad (2024)" aria-label="Urban Flood Modelling course — BITS Hyderabad (2024)"><img src="assets/conferences/conf-06.jpg" alt="Urban Flood Modelling course — BITS Hyderabad (2024)" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Course cohort — BITS Hyderabad (2024)" aria-label="Course cohort — BITS Hyderabad (2024)"><img src="assets/conferences/conf-07.jpg" alt="Course cohort — BITS Hyderabad (2024)" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Research discussion with Prof. Nigel Wright" aria-label="Research discussion with Prof. Nigel Wright"><img src="assets/conferences/conf-08.jpg" alt="Research discussion with Prof. Nigel Wright" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Research discussion with Prof. Bruno Merz" aria-label="Research discussion with Prof. Bruno Merz"><img src="assets/conferences/conf-09.jpg" alt="Research discussion with Prof. Bruno Merz" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Research discussion with Prof. Venkatesh Merwade" aria-label="Research discussion with Prof. Venkatesh Merwade"><img src="assets/conferences/conf-10.jpg" alt="Research discussion with Prof. Venkatesh Merwade" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Presenting research — BITS Hyderabad (2024)" aria-label="Presenting research — BITS Hyderabad (2024)"><img src="assets/conferences/conf-11.jpg" alt="Presenting research — BITS Hyderabad (2024)" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Best Paper Award — YLC 2024, NIDM, New Delhi" aria-label="Best Paper Award — YLC 2024, NIDM, New Delhi"><img src="assets/conferences/conf-12.jpg" alt="Best Paper Award — YLC 2024, NIDM, New Delhi" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Young Leaders Conclave 2024 — New Delhi" aria-label="Young Leaders Conclave 2024 — New Delhi"><img src="assets/conferences/conf-13.jpg" alt="Young Leaders Conclave 2024 — New Delhi" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Flood Risk Analysis training for L&amp;T — Chennai (2025)" aria-label="Flood Risk Analysis training for L&amp;T — Chennai (2025)"><img src="assets/conferences/conf-14.jpg" alt="Flood Risk Analysis training for L&amp;T — Chennai (2025)" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Flood Risk Analysis training for L&amp;T — Chennai (2025)" aria-label="Flood Risk Analysis training for L&amp;T — Chennai (2025)"><img src="assets/conferences/conf-15.jpg" alt="Flood Risk Analysis training for L&amp;T — Chennai (2025)" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="IAHS 2025 — XIIth Scientific Assembly, IIT Roorkee" aria-label="IAHS 2025 — XIIth Scientific Assembly, IIT Roorkee"><img src="assets/conferences/conf-16.jpg" alt="IAHS 2025 — XIIth Scientific Assembly, IIT Roorkee" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Presenting HyEco at IAHS 2025 — IIT Roorkee" aria-label="Presenting HyEco at IAHS 2025 — IIT Roorkee"><img src="assets/conferences/conf-17.jpg" alt="Presenting HyEco at IAHS 2025 — IIT Roorkee" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="ICFWR 2024 — IIT Roorkee" aria-label="ICFWR 2024 — IIT Roorkee"><img src="assets/conferences/conf-18.jpg" alt="ICFWR 2024 — IIT Roorkee" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="EGU General Assembly 2026 — Vienna, Austria" aria-label="EGU General Assembly 2026 — Vienna, Austria"><img src="assets/conferences/conf-19.jpg" alt="EGU General Assembly 2026 — Vienna, Austria" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="EGU General Assembly 2026 — Vienna, Austria" aria-label="EGU General Assembly 2026 — Vienna, Austria"><img src="assets/conferences/conf-20.jpg" alt="EGU General Assembly 2026 — Vienna, Austria" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button></div>
+  </div></section>
+
+  <section class="gsec alt"><div class="wrap">
+    <div class="tab"><h2>Co-curricular Activities</h2></div>
+    <div class="grid"><button class="gcell" type="button" aria-label="Co-curricular activity 1"><img src="assets/activities/cocurricular-01.jpg" alt="Co-curricular activity 1" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 2"><img src="assets/activities/cocurricular-02.jpg" alt="Co-curricular activity 2" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 3"><img src="assets/activities/cocurricular-03.jpg" alt="Co-curricular activity 3" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 4"><img src="assets/activities/cocurricular-04.jpg" alt="Co-curricular activity 4" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 5"><img src="assets/activities/cocurricular-05.jpg" alt="Co-curricular activity 5" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 6"><img src="assets/activities/cocurricular-06.jpg" alt="Co-curricular activity 6" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 7"><img src="assets/activities/cocurricular-07.jpg" alt="Co-curricular activity 7" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 8"><img src="assets/activities/cocurricular-08.jpg" alt="Co-curricular activity 8" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 9"><img src="assets/activities/cocurricular-09.jpg" alt="Co-curricular activity 9" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 10"><img src="assets/activities/cocurricular-10.jpg" alt="Co-curricular activity 10" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 11"><img src="assets/activities/cocurricular-11.jpg" alt="Co-curricular activity 11" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 12"><img src="assets/activities/cocurricular-12.jpg" alt="Co-curricular activity 12" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 13"><img src="assets/activities/cocurricular-13.jpg" alt="Co-curricular activity 13" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 14"><img src="assets/activities/cocurricular-14.jpg" alt="Co-curricular activity 14" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 15"><img src="assets/activities/cocurricular-15.jpg" alt="Co-curricular activity 15" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 16"><img src="assets/activities/cocurricular-16.jpg" alt="Co-curricular activity 16" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" aria-label="Co-curricular activity 17"><img src="assets/activities/cocurricular-17.jpg" alt="Co-curricular activity 17" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button></div>
+  </div></section>
+
+  <section class="gsec"><div class="wrap">
+    <div class="tab"><h2>Delhi 2023 Field Visit</h2></div>
+    <div class="grid"><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 1"><img src="assets/flood/1.jpg" alt="Delhi 2023 field visit 1" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 2"><img src="assets/flood/2.jpg" alt="Delhi 2023 field visit 2" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 3"><img src="assets/flood/3.jpg" alt="Delhi 2023 field visit 3" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 4"><img src="assets/flood/4.jpg" alt="Delhi 2023 field visit 4" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 5"><img src="assets/flood/5.jpg" alt="Delhi 2023 field visit 5" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 6"><img src="assets/flood/6.jpg" alt="Delhi 2023 field visit 6" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 7"><img src="assets/flood/7.jpg" alt="Delhi 2023 field visit 7" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 8"><img src="assets/flood/8.jpg" alt="Delhi 2023 field visit 8" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 9"><img src="assets/flood/9.jpg" alt="Delhi 2023 field visit 9" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 10"><img src="assets/flood/10.jpg" alt="Delhi 2023 field visit 10" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 11"><img src="assets/flood/11.jpg" alt="Delhi 2023 field visit 11" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 12"><img src="assets/flood/12.jpg" alt="Delhi 2023 field visit 12" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 13"><img src="assets/flood/13.jpg" alt="Delhi 2023 field visit 13" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 14"><img src="assets/flood/14.jpg" alt="Delhi 2023 field visit 14" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 15"><img src="assets/flood/15.jpg" alt="Delhi 2023 field visit 15" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 16"><img src="assets/flood/16.jpg" alt="Delhi 2023 field visit 16" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 17"><img src="assets/flood/17.jpg" alt="Delhi 2023 field visit 17" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 18"><img src="assets/flood/18.jpg" alt="Delhi 2023 field visit 18" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 19"><img src="assets/flood/19.jpg" alt="Delhi 2023 field visit 19" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button><button class="gcell" type="button" data-cap="Delhi 2023 field visit" aria-label="Delhi 2023 field visit 20"><img src="assets/flood/20.jpg" alt="Delhi 2023 field visit 20" loading="lazy" onerror="this.closest('.gcell').style.display='none'"></button></div>
+  </div></section>
+</main>
+
+<div style="text-align:center;padding:0 0 40px"><a class="btn btn-primary" href="index.html" style="color:#fff">← Back to home</a></div>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-lead">
+        <div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg>
+          <h3>Let's collaborate for<br>safer &amp; resilient cities.</h3></div>
+        <p>Open to research collaboration, interdisciplinary projects and academic discussions.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="mailto:rahul_d@wr.iitr.ac.in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>rahul_d@wr.iitr.ac.in</a>
+        <a href="tel:+917895438560"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2Z"/></svg>+91 78954 38560</a>
+        <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>IIT Roorkee, Uttarakhand, India</p>
+      </div>
+      <div class="foot-col">
+        <h4>Profiles</h4>
+        <a href="https://www.linkedin.com/in/rahuldeopaiitr/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M15 17v-4"/></svg>LinkedIn</a>
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=qx3Ynx4AAAAJ&amp;view_op=list_works&amp;sortby=pubdate" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3 2 9l10 6 10-6-10-6Z"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg>Google Scholar</a>
+        <a href="https://orcid.org/0009-0009-0060-3227" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M9 8h.01"/></svg>ORCID</a>
+        <a href="https://github.com/rahuldeopaiitr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 19c-4 1.5-4-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.9 2.8 5.9 3.1 5.9 3.1a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.5 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>GitHub</a>
+      </div>
+      <div class="foot-col"><div class="foot-photo"><img src="assets/iitr.jpg" alt="IIT Roorkee" onerror="this.parentElement.style.display='none'"></div></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> Rahul Deopa · IIT Roorkee. All rights reserved.</span>
+      <span>Hydrology · Flood risk · Water quality · QMRA</span>
+    </div>
+  </div>
+</footer>
+
+<!-- lightbox -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" id="lbX" aria-label="Close">&times;</button>
+  <button class="nav prev" id="lbPrev" aria-label="Previous photo">&lsaquo;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="nav next" id="lbNext" aria-label="Next photo">&rsaquo;</button>
+  <div class="cap" id="lbCap"></div>
+</div>
+
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  (function(){var b=document.getElementById('burger'),m=document.getElementById('menu');
+    b.addEventListener('click',function(){var o=m.classList.toggle('open');b.setAttribute('aria-expanded',o);});})();
+
+  (function(){
+    var lb=document.getElementById('lb'),img=document.getElementById('lbImg'),cap=document.getElementById('lbCap');
+    var list=[],idx=0;
+    function visibleCells(){return [].slice.call(document.querySelectorAll('.gcell')).filter(function(c){return c.style.display!=='none';});}
+    function show(i){var cells=list;idx=(i+cells.length)%cells.length;var c=cells[idx];var im=c.querySelector('img');
+      img.src=im.src;img.alt=im.alt;cap.textContent=c.getAttribute('data-cap')||'';}
+    function open(cell){list=visibleCells();var i=list.indexOf(cell);if(i<0)i=0;lb.classList.add('open');document.body.style.overflow='hidden';show(i);}
+    function close(){lb.classList.remove('open');document.body.style.overflow='';}
+    document.querySelectorAll('.gcell').forEach(function(c){c.addEventListener('click',function(){open(c);});});
+    document.getElementById('lbX').addEventListener('click',close);
+    document.getElementById('lbPrev').addEventListener('click',function(){show(idx-1);});
+    document.getElementById('lbNext').addEventListener('click',function(){show(idx+1);});
+    lb.addEventListener('click',function(e){if(e.target===lb)close();});
+    document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;
+      if(e.key==='Escape')close();else if(e.key==='ArrowLeft')show(idx-1);else if(e.key==='ArrowRight')show(idx+1);});
+  })();
+</script>
+</body>
+</html>
